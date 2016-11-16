@@ -1,2 +1,2 @@
-# rocket.chat.stunnel
-The official Rocket.Chat Docker Image with stunnel installed
+# docker-alpine-stunnelclient
+A simple alpine-based stunnel client in docker (e.g. LDAP client -> stunnel -> LDAPS server)
