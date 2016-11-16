@@ -8,10 +8,6 @@ if [[ -z "$LOCAL_PORT" || -z "$TARGET_ADDRESS" ]] ; then
   exit 1
 fi
 
-#set default verify level 4 ("Ignore the chain and only verify the peer certificate.")
-#see https://www.stunnel.org/static/stunnel.html
-: VERIFY_LEVEL=${VERIFY_LEVEL:4}
-
 : DEBUG_LEVEL=${DEBUG_LEVEL:warning}
 
 cat << EOF > /etc/stunnel/plainToTLS.conf
@@ -24,11 +20,17 @@ options = NO_SSLv2
 client = yes
 accept = ${LOCAL_PORT}
 connect = ${TARGET_ADDRESS}
-verify = ${VERIFY_LEVEL}
+
 EOF
 
 if [ ! -z "${CA_FILE}" ] ; then
   echo "CAfile = ${CA_FILE}" >> /etc/stunnel/plainToTLS.conf
+fi
+
+#no verify means ignoring all server/client certs
+#see https://www.stunnel.org/static/stunnel.html
+if [ -z "$VERIFY_LEVEL" ] ; then
+  echo "verify = ${VERIFY_LEVEL}" >> /etc/stunnel/plainToTLS.conf
 fi
 
 exec /usr/bin/stunnel /etc/stunnel/plainToTLS.conf
