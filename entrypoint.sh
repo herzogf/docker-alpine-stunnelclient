@@ -16,8 +16,8 @@ syslog = no
 debug = ${DEBUG_LEVEL}
 options = NO_SSLv2
 
-setuid     = nobody
-setgid     = nobody
+setuid = nobody
+setgid = nogroup
 
 socket=l:TCP_NODELAY=1
 socket=r:TCP_NODELAY=1
