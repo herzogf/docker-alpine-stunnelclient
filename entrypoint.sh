@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 #fail fast
 set -e
