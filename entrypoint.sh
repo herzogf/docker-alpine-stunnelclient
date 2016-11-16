@@ -8,7 +8,7 @@ if [[ -z "$LOCAL_PORT" || -z "$TARGET_ADDRESS" ]] ; then
   exit 1
 fi
 
-: DEBUG_LEVEL=${DEBUG_LEVEL:warning}
+DEBUG_LEVEL=${DEBUG_LEVEL:-warning}
 
 cat << EOF > /etc/stunnel/plainToTLS.conf
 foreground = yes
