@@ -1,11 +1,11 @@
 FROM alpine:3.4
 MAINTAINER Florian Herzog
 
-RUN set -e && apk update && apk add --update stunnel
+COPY . /
 
 RUN set -e && \
-    apk update && \
-    apk add --update stunnel && \
-    rm -rf /tmp/* /var/cache/apk/*
+    apk add --no-cache openssl stunnel && \
+    rm -rf /tmp/* /var/cache/apk/* && \
+    chmod a+rx /entrypoint.sh
 
-ENTRYPOINT ["/opt/run-stunnel.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
