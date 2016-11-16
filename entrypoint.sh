@@ -29,7 +29,7 @@ fi
 
 #no verify means ignoring all server/client certs
 #see https://www.stunnel.org/static/stunnel.html
-if [ -z "$VERIFY_LEVEL" ] ; then
+if [ ! -z "$VERIFY_LEVEL" ] ; then
   echo "verify = ${VERIFY_LEVEL}" >> /etc/stunnel/plainToTLS.conf
 fi
 
